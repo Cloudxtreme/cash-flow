@@ -17,6 +17,8 @@ alphalight.woff: alphalight-f955d66c731c8031ef537d61c048825a.woff
 alphalight/index.woff: alphalight-f955d66c731c8031ef537d61c048825a.woff
 application.js: application-e3cf28c2332edc18afdd125063abe4f6.js
 application/index.js: application-e3cf28c2332edc18afdd125063abe4f6.js
+signup_manifest.js: signup_manifest-5f52434111150ae7e44be8469fdc2674.js
+signup_manifest/index.js: signup_manifest-5f52434111150ae7e44be8469fdc2674.js
 application.css: application-3d6212a79f2f96a9116040927d6f6254.css
 application/index.css: application-3d6212a79f2f96a9116040927d6f6254.css
 glyphicons-halflings-white.png: glyphicons-halflings-white-6cccd17a7aed91dbc0157d343c68c0d9.png
