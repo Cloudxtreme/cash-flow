@@ -1,5 +1,31 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                     :integer          not null, primary key
+#  email                  :string(255)      default(""), not null
+#  encrypted_password     :string(255)      default(""), not null
+#  reset_password_token   :string(255)
+#  reset_password_sent_at :datetime
+#  remember_created_at    :datetime
+#  sign_in_count          :integer          default(0)
+#  current_sign_in_at     :datetime
+#  last_sign_in_at        :datetime
+#  current_sign_in_ip     :string(255)
+#  last_sign_in_ip        :string(255)
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  customer_id            :string(255)
+#  last_4_digits          :string(255)
+#  role                   :string(255)
+#  first_name             :string(255)
+#  last_name              :string(255)
+#
+
 class User < ActiveRecord::Base
-  rolify
+
+  has_many :subscriptions
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -7,10 +33,55 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :stripe_token, :coupon
+  attr_accessible :email, :password, :remember_me, :stripe_token, :coupon, :role, :first_name, :last_name, :last_4_digits
   attr_accessor :stripe_token, :coupon
-  before_save :update_stripe
+
+  attr_accessible :roles_attributes
+
+  # before_save :update_stripe
   before_destroy :cancel_subscription
+
+  # only called when the user finally puts in a card
+  def save_with_stripe
+    begin
+      self.save
+      Stripe::Customer.create :id => self.id, :amount => self.amount, :interval => 'month', :name => self.name, :currency => 'usd'
+    rescue Stripe::StripeError => e
+      self.destroy
+      logger.error "Stripe Error: " + e.message
+      errors.add :base, "#{e.message}."
+      false
+    end
+  end
+
+  def name
+    "#{first_name} #{last_name}"
+  end
+
+  def update_with_stripe attributes
+    begin
+      self.update_attributes attributes
+      sp = Stripe::Plan.retrieve(self.id.to_s)
+      sp.delete
+      Stripe::Plan.create :id => self.id, :amount => self.amount, :interval => 'month', :name => self.name, :currency => 'usd'
+    rescue Stripe::StripeError => e
+      logger.error "Stripe Error: " + e.message
+      errors.add :base, "#{e.message}."
+      false
+    end
+  end
+
+  def destroy_with_stripe
+    begin
+      c = Stripe::Customer.retrieve(self.id.to_s)
+      c.delete
+      self.destroy
+    rescue Stripe::StripeError => e
+      logger.error "Stripe Error: " + e.message
+      errors.add :base, "#{e.message}."
+      false
+    end
+  end
 
   def update_plan(role)
     self.role_ids = []
@@ -26,29 +97,23 @@ class User < ActiveRecord::Base
     false
   end
   
-  def update_stripe
+  def update_with_stripe(subscription, attributes)
     return if email.include?(ENV['ADMIN_EMAIL'])
-    return if email.include?('@example.com') and not Rails.env.production?
+
+    self.update_attributes attributes
+
     if customer_id.nil?
       if !stripe_token.present?
         raise "Stripe token not present. Can't create account."
       end
-      if coupon.blank?
-        customer = Stripe::Customer.create(
-          :email => email,
-          :description => name,
-          :card => stripe_token,
-          :plan => roles.first.name
-        )
-      else
-        customer = Stripe::Customer.create(
-          :email => email,
-          :description => name,
-          :card => stripe_token,
-          :plan => roles.first.name,
-          :coupon => coupon
-        )
-      end
+
+      customer = Stripe::Customer.create(
+        :email => email,
+        :description => name,
+        :card => stripe_token,
+        :plan => subscription.plan.id
+      )
+
     else
       customer = Stripe::Customer.retrieve(customer_id)
       if stripe_token.present?
@@ -86,6 +151,10 @@ class User < ActiveRecord::Base
   def expire
     UserMailer.expire_email(self).deliver
     destroy
+  end
+
+  def is?(role)
+    self.role == role || self.role.to_sym == role
   end
   
 end

@@ -1,0 +1,33 @@
+.logo-container
+  = link_to "Warnock and Polivka, Inc", root_path, :class => 'logo'
+  .secondary
+    Billing &amp; subscriptions
+
+.login-box
+  -if user_signed_in?
+    = link_to 'Logout', destroy_user_session_path, :method=>'delete', :class => 'button login-button'    
+  -else
+    = link_to 'Login', new_user_session_path, :class => 'button login-button' 
+
+  -if user_signed_in?
+    = link_to 'My account', edit_user_registration_path, :class => 'button my-account-button' 
+    .current-user
+      =current_user.email
+
+.nav-box
+  %ul.nav
+
+    // Admin nav
+    -if user_signed_in? and current_user.is? :admin
+      %li
+        =link_to 'Dashboard', dashboard_path
+        .arrow
+      %li
+        =link_to 'Subscriptions', subscriptions_path
+        .arrow
+      %li
+        =link_to 'Plans', plans_path
+        .arrow
+      %li
+        =link_to 'Customers', users_path
+        .arrow

@@ -1,0 +1,34 @@
+%h2
+  Plans
+
+=link_to 'New plan', new_plan_path, :class => 'button create-new-button new-plan-button'
+
+%table.table.plans
+
+  %thead
+    %tr
+      %th
+        Name
+      %th
+        Amount
+      %th
+        Created on
+      %th
+
+  %tbody
+    -if @plans.length == 0
+      .no-entries
+        No plans created yet
+    -else
+      -@plans.each do |plan|
+        %tr
+          %td
+            =plan.name
+          %td
+            =humanized_money_with_symbol plan.amount_in_dollars
+          %td
+            =plan.created_at.to_date
+            
+          %td.actions
+            =link_to "Edit", edit_plan_path(plan), :class => 'button mini'
+            =link_to "Delete", plan, :method => :delete, :class => 'button mini danger'

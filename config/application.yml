@@ -7,11 +7,22 @@
 # makes 'Your_Gmail_Username' available as ENV["GMAIL_USERNAME"]
 # Add application configuration variables here, as shown below.
 #
-GMAIL_USERNAME: Your_Username
-GMAIL_PASSWORD: Your_Password
-ADMIN_NAME: First User
-ADMIN_EMAIL: user@example.com
-ADMIN_PASSWORD: changeme
-ROLES: [admin, silver, gold, platinum]
-STRIPE_API_KEY: Your_Stripe_API_key
-STRIPE_PUBLIC_KEY: Your_Stripe_Public_Key
+ADMIN_FIRST_NAME: Connor
+ADMIN_LAST_NAME: Warnock
+ADMIN_EMAIL: c@c.com
+ADMIN_PASSWORD: tjroot87
+
+
+STRIPE_TEST_API_KEY: sk_test_sGxHr0LS7yojWKZ8bwqAa3Ow
+STRIPE_TEST_PUBLIC_KEY: pk_test_rUPeZSivyjKd5XVlHT6vki6t
+STRIPE_LIVE_API_KEY: sk_live_7iUuwZrJh8v2YsM6RhPsMf0A
+STRIPE_LIVE_PUBLIC_KEY: pk_live_ZxbXHGVlMMNKvfrALNt8LSQi
+
+MANDRILL_USERNAME: hello@victoryframework.com
+MANDRILL_API_KEY: 5UkSsM-0RLrawmlLhctYJw
+
+SENDGRID_USERNAME: hello@victoryframework.com
+SENDGRID_PASSWORD: ch0d3$!!$
+
+DEVELOPMENT_DOMAIN: http://localhost:3001
+PRODUCTION_DOMAIN: https://warnockandpolivka.com

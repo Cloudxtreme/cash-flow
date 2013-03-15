@@ -1,0 +1,319 @@
+@import '_variables';
+@import '_mixins';
+
+td.actions {
+  width: 150px;
+}
+
+table .button {
+  width: 60px;
+}
+
+tbody {
+  td {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  display: block;
+  margin-top: 6px;
+  background: #fafafa;
+
+  &.active {
+    background: @success_green;
+  }
+
+  &.inactive {
+    background: @warning_yellow;
+  }
+}
+
+.credit-card-errors {
+  .error {
+    width: 600px - 50px;
+    padding: 10px 25px;
+    .rounded(3px);
+    background: @warning_yellow;
+    float: left;
+    margin-bottom: 20px;
+  }
+}
+
+.alert {
+  width: 600px - 50px;
+  padding: 10px 25px;
+  .rounded(3px);
+  background: #fafafa;
+  position: fixed;
+  top: 20px;
+  left: 360px;
+  z-index: 100;
+
+  &.warning {
+    background: @warning_yellow;
+  }
+
+  &.success {
+    background: @success_green;
+  }
+
+  .close {
+    display: block;
+    position: absolute;
+    top: 5px;
+    left: -12px;
+    .rounded(12px);
+    width: 24px;
+    height: 24px - 1px;
+    padding-top: 1px;
+    text-align: center;
+    background: @brand_primary_color;
+    color: #fafafa;
+    cursor: pointer;
+
+    &:hover {
+      background: darken(@brand_primary_color, 10%);
+    }
+
+  }
+}
+
+.logo-container {
+  position: fixed;
+  top: @top_offset - 6px;
+  left: 30px;
+  width: 276px;
+  height: 70px;
+
+  .logo {
+    letter-spacing: -1px;
+    font-size: 26px;
+    line-height: 40px;
+    .primary_font_bold();
+    text-decoration: none;
+    color: #333;
+    position: absolute;
+    width: 100%;
+    text-align: right;
+    top: 0;
+    left: 0;
+    
+  }
+
+  .secondary {
+      position: absolute;
+      .primary_font();
+      font-size: 18px;
+      line-height: 30px;
+      width: 100%;
+      text-align: right;
+      top: 40px;
+      left: 0;
+    }
+}
+
+.sign-up-button {
+  width: 60px;
+}
+
+.nav-box {
+  width: 180px;
+  left: 130px;
+  top: @top_offset + 180px;
+  position: fixed;
+}
+
+.nav {
+  list-style: none;
+  margin: 0;
+
+  li {
+    margin: 0;
+    padding: 0;
+    position: relative;
+
+    a {
+      position: relative;
+      padding: 6px 5px;
+      text-align: right;
+      width: 180px - 10px - 30px;
+      padding-right: 30px;
+      display: block;
+      font-size: 14px;
+      line-height: 24px;
+      text-decoration: none;
+      border-top: 1px solid @brand_primary_color;
+
+
+    }
+
+    .arrow {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+
+      width: 0; 
+      height: 0; 
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      
+      border-left: 5px solid @brand_primary_color;
+    }
+
+    &:last-child {
+      a {
+        border-bottom: 1px solid @brand_primary_color;
+      }
+    }
+
+  }
+}
+
+.login-box {
+  width: 200px;
+  height: 20px;
+  left: 110px;
+  top: @top_offset + 110px;
+  position: fixed;
+
+  .current-user {
+    float: left;
+    width: 100%;
+    margin-top: 4px;
+    text-align: right;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+}
+
+.my-account-button {
+  width: 104px;
+  margin-right:0;
+}
+
+.content-box {
+  position: fixed;
+  top: 0;
+  left: 360px;
+  bottom: 0;
+  overflow-y: scroll;
+  overflow-x: visible;
+  width: 600px;
+}
+
+.messages-container {
+  height: @top_offset;
+}
+
+.form-box {
+  float: left;
+}
+
+.login-box {
+  .button {
+    float: right;
+    margin-right: 0;
+    margin-left: 0px;
+
+    &.login-button {
+      margin-right: 0;
+      margin-left: 10px;
+    }
+  }
+}
+
+.login-form {
+  .controls input {
+    width: 220px;
+  }
+}
+
+.field-row {
+  float: left;
+  width: 100%;
+  position: relative;
+  margin-bottom: 12px;
+
+  &.remember-me {
+    margin-top: -10px;
+  }
+}
+
+.forgot-password {
+  position: absolute;
+  top: 0;
+  left: 194px;
+}
+
+label.checkbox {
+  width: 20px;
+  float: left;
+}
+
+.user_remember_me {
+  width: 100%;
+  float: left;
+  position: relative;
+  margin-bottom: 0px;
+
+  .control-label {
+    float: left;
+    width: auto;
+    margin-left: 24px;
+    margin-top: 2px;
+  }
+
+  label.checkbox {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+input.reset-password-button {
+  width: 190px;
+}
+
+.create-new-button {
+  width: 160px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.error-box {
+  position: absolute;
+  right: 70px;
+  top: 40px;
+  width: 280px;
+  z-index: 102;
+
+  .error {
+    width: 240px;
+    padding: 10px 20px;
+    float: left;
+    .rounded(3px);
+    margin-bottom: 10px;
+    background: @warning_yellow;
+  }
+}
+
+.no-entries {
+  background: @brand_primary_color;
+  padding: 10px 14px;
+  .rounded(3px);
+  color: #fff;
+  font-size: 14px;
+  line-height: 22px;
+  text-align: center;
+  width: 260px;
+  position: absolute;
+  top: 120px;
+  left: 50%;
+  margin-left: -130px;
+}

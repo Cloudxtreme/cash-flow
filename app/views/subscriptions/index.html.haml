@@ -1,0 +1,41 @@
+%h2
+  Subscriptions
+
+=link_to 'New subscription', new_subscription_path, :class => 'button create-new-button new-subscription-button'
+
+%table.table.subscription-plans
+
+  %thead
+    %tr
+      %th
+        Customer
+      %th
+        Plan
+      %th
+        Created
+      %th
+        Active
+      %th
+
+  %tbody
+    -if @subscriptions.length == 0
+      .no-entries
+        No subscriptions created yet
+    -else
+      -@subscriptions.each do |subscription|
+        %tr
+          %td
+            =subscription.user.name
+          %td
+            =subscription.plan.name
+          %td
+            =subscription.created_at.strftime("%b %d, %Y")
+          %td
+            -if subscription.active == true
+              .indicator.active
+            -else
+              .indicator.inactive
+
+          %td.actions
+            =link_to "Edit", edit_subscription_path(subscription), :class => 'button mini'
+            =link_to "Delete", subscription, :method => :delete, :class => 'button mini danger'

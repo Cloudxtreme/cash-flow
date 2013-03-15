@@ -1,0 +1,26 @@
+.form-box
+  -if @plan.errors.any? 
+    .error-box   
+      -@plan.errors.full_messages.each do |error|
+        .error
+          =error
+
+  = form_for @plan do |f|
+    .field-row
+      =f.label :name, 'Name'
+      =f.text_field :name
+
+    .field-row
+      =f.label :amount, 'Amount (in cents, no symbol)'
+      =f.text_field :amount
+
+    .field-row
+      =f.label :trial_period_days, 'Trial period (in days)'
+      =f.text_field :trial_period_days
+    .mini-container.spaced-bottom
+      %p
+        If the trial period is zero days, the first charge will occur immediately on signup.  Otherwise, the first charge will occur after the trial is over.  This is handy for delaying subscription billing if necessary.
+
+
+    .field-row
+      = f.submit nil, :class => 'button'

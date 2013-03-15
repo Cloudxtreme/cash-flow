@@ -3,12 +3,12 @@ class Ability
 
   def initialize(user)
     user ||= User.new # guest user (not logged in)
-    if user.has_role? :admin
+    if user.is? :admin
       can :manage, :all
     else
-      can :view, :silver if user.has_role? :silver
-      can :view, :gold if user.has_role? :gold
-      can :view, :platinum if user.has_role? :platinum
+      can :view, :silver if user.is? :silver
+      can :view, :gold if user.is? :gold
+      can :view, :platinum if user.is? :platinum
     end
   end
 end

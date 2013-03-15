@@ -1,0 +1,31 @@
+%h2
+  Customers
+
+=link_to 'New customer', new_user_path, :class => 'button create-new-button new-customer-button'
+
+%table.table.subscription-plans
+
+  %thead
+    %tr
+      %th
+        Name
+      %th
+        Email
+      %th
+
+  %tbody
+    -if @users.length == 0
+      .no-entries
+        No customers created yet
+    -else
+      -@users.each do |user|
+        %tr
+          %td
+            =user.name
+          %td
+            =user.email
+            
+          %td.actions
+            =link_to "Edit", edit_user_path(user), :class => 'button mini'
+            =link_to "Delete", user, :method => :delete, :class => 'button mini danger' unless user == current_user
+

@@ -11,18 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121017180539) do
+ActiveRecord::Schema.define(:version => 20130315003625) do
 
-  create_table "roles", :force => true do |t|
+  create_table "plans", :force => true do |t|
+    t.string   "stripe_id"
+    t.integer  "amount"
+    t.string   "interval"
     t.string   "name"
-    t.integer  "resource_id"
-    t.string   "resource_type"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.integer  "trial_period_days", :default => 0
   end
 
-  add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
-  add_index "roles", ["name"], :name => "index_roles_on_name"
+  create_table "subscriptions", :force => true do |t|
+    t.string   "plan_name"
+    t.integer  "user_id"
+    t.integer  "plan_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "token"
+    t.boolean  "active"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -37,9 +46,11 @@ ActiveRecord::Schema.define(:version => 20121017180539) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
-    t.string   "name"
     t.string   "customer_id"
     t.string   "last_4_digits"
+    t.string   "role"
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

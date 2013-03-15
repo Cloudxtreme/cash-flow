@@ -1,0 +1,42 @@
+.form-box
+  -if @subscription.errors.any? 
+    .error-box   
+      -@subscription.errors.full_messages.each do |error|
+        .error
+          =error
+
+  = form_for @subscription do |f|
+
+    .field-block
+     
+      %h3
+        Customer
+      %p
+        Choose an existing customer
+      .field-row.spaced
+        =f.collection_select(:user_id, User.where(:role => 'customer'), :id, :name)
+
+      / =f.fields_for :user do |u|
+      /   .field-row
+      /     =u.label :name, 'Name'
+      /     =u.text_field :name
+      /   .field-row
+      /     =u.label :email, 'Email'
+      /     =u.text_field :email
+
+    .field-block
+
+      %h3
+        Plan
+      %p
+        Choose an existing plan
+      .field-row.spaced
+        =f.collection_select(:plan_id, Plan.all, :id, :name)
+
+      / =f.fields_for :plan do |p|
+      /   .field-row
+      /     =p.label :name, 'Plan name'
+      /     =p.text_field :name
+
+    .field-row
+      = f.submit nil, :class => 'button'

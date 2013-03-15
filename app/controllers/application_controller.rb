@@ -2,13 +2,17 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_path, :alert => exception.message
+    redirect_to new_user_session_path, :alert => exception.message
+  end
+
+  def authorize_as_admin
+    authorize! :index, @user, :message => 'Not authorized as an administrator.'
   end
 
   def after_sign_in_path_for(resource)
-    case current_user.roles.first.name
+    case current_user.role
       when 'admin'
-        users_path
+        dashboard_path
       when 'silver'
         content_silver_path
       when 'gold'

@@ -1,0 +1,14 @@
+<h2>Reset your password</h2>
+
+<div class="form-box">
+  <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+    <%= devise_error_messages! %>
+
+    <div class="field-row">
+      <%= f.label :email %>
+      <%= f.email_field :email, :autofocus => true %>
+    </div>
+
+    <div><%= f.submit "Send reset instructions", :class => 'button reset-password-button' %></div>
+  <% end %>
+</div>

@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Rails Stripe Membership Saas" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "Warnock and Polivka Inc - Subscription Billing" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Rails Stripe Membership Saas" %>">
     <%= stylesheet_link_tag "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
@@ -10,24 +10,16 @@
     <%= yield(:head) %>
   </head>
   <body class="<%= controller_name %> <%= action_name %>">
-    <header class="navbar navbar-fixed-top">
-      <nav class="navbar-inner">
-        <div class="container">
-          <%= render 'layouts/navigation' %>
-        </div>
-      </nav>
-    </header>
-    <div id="main" role="main">
+    <div class="wrapper">
       <div class="container">
-        <div class="content">
-           <div class="row">
-            <div class="span12">
-              <%= render 'layouts/messages' %>
-              <%= yield %>
-            </div>
+        <%= render 'shared/header' %>
+        <div class="content-box">
+          <div class="mini-container messages-container">
+            <%= render 'layouts/messages' %>
           </div>
-          <footer>
-          </footer>
+          <div class="mini-container">
+            <%= yield %>
+          </div>
         </div>
       </div> <!--! end of .container -->
     </div> <!--! end of #main -->
