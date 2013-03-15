@@ -1,18 +1,22 @@
 class DashboardController < ApplicationController
+  before_filter :authenticate_user!
+  # before_filter :authorize_as_admin
 
   def index
-    subscriptions = Subscription.where :active => true
+    if current_user.is? :admin
+      subscriptions = Subscription.where :active => true
 
-    subscriptions.each do |subscription|
-      @total += subscription.plan.amount
-    end
-
-    if @total.nil?
       @total = 0
-    end
+      subscriptions.each do |subscription|
+        @total += subscription.plan.amount
+      end
 
-    @total
-    
+      render 'dashboard/index'
+    else
+      @subscription_count = current_user.subscriptions.count
+      render 'dashboard/customer_index'
+    end  
+
   end
 
 end

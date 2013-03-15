@@ -14,7 +14,7 @@
 
 class Plan < ActiveRecord::Base
 
-  has_many :subscriptions
+  has_many :subscriptions, :dependent => :destroy
   
   attr_accessible :amount, :interval, :name, :stripe_id, :trial_period_days
 

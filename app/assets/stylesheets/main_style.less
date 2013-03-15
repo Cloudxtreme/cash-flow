@@ -177,7 +177,7 @@ tbody {
   width: 200px;
   height: 20px;
   left: 110px;
-  top: @top_offset + 110px;
+  top: @top_offset + 90px;
   position: fixed;
 
   .current-user {
@@ -189,6 +189,16 @@ tbody {
     line-height: 20px;
   }
 
+  .button {
+    float: right;
+    margin-right: 0;
+    margin-left: 0px;
+
+    &.login-button {
+      margin-right: 0;
+      margin-left: 10px;
+    }
+  }
 }
 
 .my-account-button {
@@ -214,19 +224,6 @@ tbody {
   float: left;
 }
 
-.login-box {
-  .button {
-    float: right;
-    margin-right: 0;
-    margin-left: 0px;
-
-    &.login-button {
-      margin-right: 0;
-      margin-left: 10px;
-    }
-  }
-}
-
 .login-form {
   .controls input {
     width: 220px;
@@ -241,6 +238,12 @@ tbody {
 
   &.remember-me {
     margin-top: -10px;
+  }
+}
+
+.field-row {
+  select {
+    width: 160px;
   }
 }
 

@@ -59,7 +59,7 @@
 
       .field-row
         = label_tag :credit_card_number
-        = text_field_tag :credit_card_number, params[:credit_card_number], :class => 'credit-card-number', :value => '4242424242424242'
+        = text_field_tag :credit_card_number, params[:credit_card_number], :class => 'credit-card-number'
 
       .field-row
         = label_tag :expiry_date
@@ -67,7 +67,7 @@
 
       .field-row
         = label_tag :cvv, 'CVV'
-        = text_field_tag :cvv, params[:cvv], :class => 'small cvv', :value => '222'
+        = text_field_tag :cvv, params[:cvv], :class => 'small cvv'
 
   .mini-container.spaced-bottom
     .field-row

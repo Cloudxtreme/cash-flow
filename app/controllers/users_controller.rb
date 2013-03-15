@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :authorize_as_admin
+  before_filter :authorize_as_admin, :except => [:my_account, :update_my_account]
 
   def index
     @users = User.where :role => 'customer'
@@ -16,6 +16,20 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+  end
+
+  def my_account
+    @user = current_user
+  end
+
+  def update_my_account
+    @user = current_user
+    params[:user]
+    if @user.update_attributes(params[:user])
+      redirect_to my_account_path, :notice => "Settings updated"
+    else
+      redirect_to my_account_path, :alert => "Unable to update settings: #{@user.errors.messages}"
+    end
   end
   
   def update
@@ -50,7 +64,8 @@ class UsersController < ApplicationController
         # not saved in stripe yet, just delete
         user.destroy
       else
-        user.destroy_with_stripe
+        user.cancel_subscription
+        user.destroy
       end
       redirect_to users_path, :notice => "User deleted."
     else

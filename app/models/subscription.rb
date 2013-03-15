@@ -32,13 +32,19 @@ class Subscription < ActiveRecord::Base
   end
 
   def complete_signup(attributes)
-    self.user.update_with_stripe self, attributes[:user_attributes]
+    @successs = self.user.update_with_stripe self, attributes[:user_attributes]
 
     self.active = true
     self.save
 
+    logger.debug '============'
+    logger.debug 'Subscription Errors'
+    logger.debug self.errors.inspect
+
     UserMailer.notify_customer_of_signup(self.user, self).deliver
     UserMailer.notify_admin_of_signup(self.user, self).deliver
+
+    return true
   end
 
   def save_with_stripe
@@ -57,8 +63,14 @@ class Subscription < ActiveRecord::Base
 
   def destroy_with_stripe
     begin
-      # sp = Stripe::Plan.retrieve(self.id.to_s)
-      # sp.delete
+      unless self.user.customer_id.nil?
+        customer = Stripe::Customer.retrieve(self.user.customer_id)
+        unless customer.nil? or customer.respond_to?('deleted')
+          # if customer.subscription.status == 'active'
+          customer.cancel_subscription
+          # end
+        end
+      end
       self.destroy
     rescue Stripe::StripeError => e
       logger.error "Stripe Error: " + e.message

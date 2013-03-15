@@ -1,4 +1,6 @@
 class PlansController < ApplicationController
+  before_filter :authenticate_user!
+  before_filter :authorize_as_admin
 
   def index
     @plans = Plan.all

@@ -1,14 +1,10 @@
 %h2
-  Subscriptions
-
-=link_to 'New subscription', new_subscription_path, :class => 'button create-new-button new-subscription-button'
+  My Subscriptions
 
 %table.table.subscription-plans
 
   %thead
     %tr
-      %th
-        Customer
       %th
         Plan
       %th
@@ -25,8 +21,6 @@
       -@subscriptions.each do |subscription|
         %tr
           %td
-            =subscription.user.name
-          %td
             =subscription.plan.name
           %td
             =subscription.created_at.strftime("%b %d, %Y")
@@ -37,5 +31,4 @@
               .indicator.inactive
 
           %td.actions
-            =link_to "Edit", edit_subscription_path(subscription), :class => 'button mini'
-            =link_to "Delete", subscription, :method => :delete, :class => 'button mini danger'
+            =link_to "Cancel", subscription, :method => :delete, :confirm => 'Are you sure? The admin will be notified of this cancellation.', :class => 'button mini danger'

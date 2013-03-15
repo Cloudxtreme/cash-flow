@@ -24,7 +24,7 @@
 
 class User < ActiveRecord::Base
 
-  has_many :subscriptions
+  has_many :subscriptions, :dependent => :destroy
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
   attr_accessible :roles_attributes
 
   # before_save :update_stripe
-  before_destroy :cancel_subscription
+  # before_destroy :cancel_subscription
 
   # only called when the user finally puts in a card
   def save_with_stripe
@@ -100,6 +100,10 @@ class User < ActiveRecord::Base
   def update_with_stripe(subscription, attributes)
     return if email.include?(ENV['ADMIN_EMAIL'])
 
+    if attributes[:password].nil? or attributes[:password] == ''
+      attributes[:password] = Devise.friendly_token[0,20]
+    end
+
     self.update_attributes attributes
 
     if customer_id.nil?
@@ -126,11 +130,15 @@ class User < ActiveRecord::Base
     self.last_4_digits = customer.active_card.last4
     self.customer_id = customer.id
     self.stripe_token = nil
+
+    logger.debug '================'
+    logger.debug 'Stripe customer created'
+    return true
   rescue Stripe::StripeError => e
     logger.error "Stripe Error: " + e.message
     errors.add :base, "#{e.message}."
     self.stripe_token = nil
-    false
+    return false
   end
   
   def cancel_subscription

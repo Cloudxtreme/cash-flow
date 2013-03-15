@@ -10,7 +10,7 @@
     = link_to 'Login', new_user_session_path, :class => 'button login-button' 
 
   -if user_signed_in?
-    = link_to 'My account', edit_user_registration_path, :class => 'button my-account-button' 
+    = link_to 'My account', my_account_path, :class => 'button my-account-button' 
     .current-user
       =current_user.email
 
@@ -30,4 +30,8 @@
         .arrow
       %li
         =link_to 'Customers', users_path
+        .arrow
+    -elsif user_signed_in? and current_user.is? :customer
+      %li
+        =link_to 'My subscriptions', my_subscriptions_path
         .arrow
