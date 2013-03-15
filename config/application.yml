@@ -9,8 +9,8 @@
 #
 ADMIN_FIRST_NAME: Connor
 ADMIN_LAST_NAME: Warnock
-ADMIN_EMAIL: c@c.com
-ADMIN_PASSWORD: randopass
+ADMIN_EMAIL: hello@victoryframework.com
+ADMIN_PASSWORD: 
 
 STRIPE_TEST_API_KEY: sk_test_sGxHr0LS7yojWKZ8bwqAa3Ow
 STRIPE_TEST_PUBLIC_KEY: pk_test_rUPeZSivyjKd5XVlHT6vki6t
