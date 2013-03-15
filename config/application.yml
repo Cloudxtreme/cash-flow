@@ -12,17 +12,13 @@ ADMIN_LAST_NAME: Warnock
 ADMIN_EMAIL: c@c.com
 ADMIN_PASSWORD: randopass
 
-
 STRIPE_TEST_API_KEY: sk_test_sGxHr0LS7yojWKZ8bwqAa3Ow
 STRIPE_TEST_PUBLIC_KEY: pk_test_rUPeZSivyjKd5XVlHT6vki6t
 STRIPE_LIVE_API_KEY: sk_live_7iUuwZrJh8v2YsM6RhPsMf0A
 STRIPE_LIVE_PUBLIC_KEY: pk_live_ZxbXHGVlMMNKvfrALNt8LSQi
 
-MANDRILL_USERNAME: hello@victoryframework.com
-MANDRILL_API_KEY: 5UkSsM-0RLrawmlLhctYJw
-
 SENDGRID_USERNAME: hello@victoryframework.com
-SENDGRID_PASSWORD: ch0d3$!!$
+SENDGRID_PASSWORD: ch0d3333
 
 DEVELOPMENT_DOMAIN: http://localhost:3001
 PRODUCTION_DOMAIN: https://warnockandpolivka.com
