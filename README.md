@@ -3,10 +3,14 @@ Cash Flow
 
 A simple interface for creating and managing Stripe subscriptions.  Stripe is awesome, but it's not possible to use out of the box to start charges clients (you need a domain and payment interface).  This is mean to be a simple solution, perfect for freelancers who need to sign up customers for a recurring plan.  Simply clone and setup your own payment app.
 
-== Getting Started
+Getting Started
+----------------
+
 You'll need a domain with ssl (https) for the payment page.  The easiest way is to get started is to deploy to Heroku (where you can piggyback on their ssl - yourapp.herokuapp.com)
 
-== Where credit is due
+Where credit is due
+----------------
+
 This app is based off of the Rails Stripe Membership Saas app.  
 
 Rails Stripe Membership Saas
