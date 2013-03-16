@@ -1,4 +1,4 @@
-RailsStripeMembershipSaas::Application.routes.draw do
+CashFlow::Application.routes.draw do
 
   mount StripeEvent::Engine => '/stripe'
 
