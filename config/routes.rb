@@ -1,4 +1,4 @@
-CashFlow::Application.routes.draw do
+Cashflow::Application.routes.draw do
 
   mount StripeEvent::Engine => '/stripe'
 

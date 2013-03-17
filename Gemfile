@@ -10,6 +10,18 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+group :development, :test do
+  gem 'guard'
+  gem 'spork-rails'
+  # master branch version of spork fixes start bug
+  # http://stackoverflow.com/questions/14590399/error-on-start-when-using-spork-and-guard
+  gem 'guard-spork', :github => 'guard/guard-spork'
+  gem 'guard-rspec'
+  gem 'guard-cucumber'
+  gem 'rb-fsevent', '~> 0.9'
+end
+
+gem 'spork', '~> 1.0rc'
 gem 'money-rails'
 gem 'thin'
 gem 'turbolinks'

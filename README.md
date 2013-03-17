@@ -1,7 +1,7 @@
-Cash Flow
+CashFlow
 ========================
 
-A simple interface for creating and managing Stripe subscriptions.  Stripe is awesome, but it's not possible to use out of the box to start charges clients (you need a domain and payment interface).  This is mean to be a simple solution, perfect for freelancers who need to sign up customers for a recurring plan.  Simply clone and setup your own payment app.
+A simple interface for creating and managing Stripe subscriptions.  Stripe is awesome, but it's not possible to use out of the box to start charges clients (you need a domain and payment interface).  CashFlow is a simple solution, perfect for freelancers who need to sign up customers for a recurring plan.  Simply clone and setup your own payment app.
 
 Getting Started
 ----------------
@@ -14,15 +14,19 @@ Where credit is due
 This app is based off of the Rails Stripe Membership Saas app.  
 
 Rails Stripe Membership Saas
+
 https://github.com/railsapps/rails-stripe-membership-saas
 
 Devise
+
 http://github.com/plataformatec/devise
 
 CanCan
+
 https://github.com/ryanb/cancan
 
 Stripe
+
 https://stripe.com/
 ________________________
 

@@ -179,6 +179,10 @@ Then /^I should see a successful sign up message$/ do
   page.should have_content "Welcome! You have signed up successfully."
 end
 
+Then /^I should see a successful customer creation message$/ do
+  page.should have_content "Customer created"
+end
+
 Then /^I should see an invalid email message$/ do
   page.should have_content "is invalid"
 end

@@ -13,7 +13,7 @@
 #
 
 class Subscription < ActiveRecord::Base
-  attr_accessible :monthly_amount, :stripe_customer_id, :user_attributes, :plan_attributes, :user_id, :plan_id, :token
+  attr_accessible :stripe_customer_id, :user_attributes, :plan_attributes, :user_id, :plan_id, :token
 
   belongs_to :user
   belongs_to :plan
