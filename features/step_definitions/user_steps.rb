@@ -1,8 +1,13 @@
 ### UTILITY METHODS ###
 
 def create_visitor
-  @visitor ||= { :name => "Testy McUserton", :email => "example@example.com",
-    :password => "changeme", :password_confirmation => "changeme", :role => "silver" }
+  @visitor ||= { :first_name => "Testy", :last_name => "McUserton", :email => "testy@example.com",
+    :password => "changeme", :role => "customer" }
+end
+
+def create_admin_visitor
+  @visitor ||= { :first_name => "Testy", :last_name => "McUserton", :email => "testy@example.com",
+    :password => "changeme", :role => "admin" }
 end
 
 def find_user
@@ -19,8 +24,13 @@ end
 def create_user
   create_visitor
   delete_user
-  @user = FactoryGirl.create(:user, email: @visitor[:email])
-  @user.add_role(@visitor[:role])
+  @user = FactoryGirl.create(:user, email: @visitor[:email], role: @visitor[:role])
+end
+
+def create_admin
+  create_admin_visitor
+  delete_user
+  @user = FactoryGirl.create(:user, email: @visitor[:email], role: @visitor[:role])
 end
 
 def delete_user
@@ -40,19 +50,28 @@ def sign_up
 end
 
 def sign_in
-  visit '/users/sign_in'
+  visit '/login'
   fill_in "Email", :with => @visitor[:email]
   fill_in "Password", :with => @visitor[:password]
-  click_button "Sign in"
+  click_button "Login"
 end
 
 ### GIVEN ###
+Given /^I am visiting the customers admin page$/ do
+  visit '/users'
+end
+
 Given /^I am not logged in$/ do
   visit destroy_user_session_path
 end
 
 Given /^I am logged in$/ do
   create_user
+  sign_in
+end
+
+Given /^I am logged in as an admin$/ do
+  create_admin
   sign_in
 end
 
@@ -143,6 +162,10 @@ When /^I follow the subscribe for silver path$/ do
   visit '/users/sign_up/?plan=silver'
 end
 
+When /^I click "(.*?)"$/ do |link|
+  click_link link
+end
+
 ### THEN ###
 Then /^I should be signed in$/ do
   page.should have_content "Logout"
@@ -159,7 +182,7 @@ Then /^I should see "(.*?)"$/ do |text|
   page.should have_content text
 end
 
-Then /^I should be on the "([^"]*)" page$/ do |path_name|
+Then /^I should be on the "(.*?)" page$/ do |path_name|
   current_path.should == send("#{path_name.parameterize('_')}_path")
 end
 
