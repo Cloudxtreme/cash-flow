@@ -58,7 +58,7 @@
 
   .mini-container
     %h3
-      ="Total: $#{money_without_cents_and_with_symbol @victory_purchase.price_in_dollars}"
+      ="Total: #{money_without_cents_and_with_symbol @victory_purchase.price_in_dollars}"
   .mini-container.spaced-bottom
     .field-row
       = f.submit 'Purchase', :class => 'button'
