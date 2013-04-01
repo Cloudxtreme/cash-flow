@@ -5,9 +5,10 @@ Victorypayment::Application.routes.draw do
   get "dashboard" => 'dashboard#index', :as => 'dashboard'
 
   resources :subscriptions
-  get 'my-subscriptions' => 'subscriptions#customer_index', :as => 'my_subscriptions'
-  get 'subscription-signup/:token' => 'subscriptions#signup', :as => 'subscription_signup'
-  put 'subscription-signup/:token/complete' => 'subscriptions#complete_signup', :as => 'complete_subscription_signup'
+  root :to => 'victory_purchase#index', :as => 'root'
+
+  post 'complete' => 'victory_purchase#complete', :as => 'victory_purchase_complete'
+  get 'receipt/:token' => 'victory_purchase#receipt', :as => 'victory_purchase_receipt'
 
   resources :plans
   resources :users
@@ -16,14 +17,7 @@ Victorypayment::Application.routes.draw do
     root :to => 'dashboard#index'
   end
 
-  root :to => "home#index"
-
   devise_for :users, :path => '', :path_names => {:sign_in => 'login', :sign_out => 'logout', :sign_up => 'register'}, :controllers => { :registrations => 'registrations' }
-  get 'my-account' => 'users#my_account', :as => 'my_account'
-  put 'my-account' => 'users#update_my_account', :as => 'update_my_account'
 
-  get 'victory' => 'victory#index'
-  post 'victory-complete' => 'victory#complete', :as => 'victory_complete'
-  get 'victory/:token' => 'victory#purchase_complete', :as => 'victory_purchase_complete'
   
 end

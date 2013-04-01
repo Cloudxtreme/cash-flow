@@ -12,6 +12,9 @@
   <body class="<%= controller_name %> <%= action_name %>">
     <div class="v-wrapper">
       <div class="v-container spaced">
+        <div class="mini-container">
+          <%= link_to 'Back to Victory Framework', 'http://victoryframework.com', :class => 'victory-framework-link' %>
+        </div>
         <%= render 'layouts/messages_victory' %>
         <%= yield %>
       </div> <!--! end of .container -->

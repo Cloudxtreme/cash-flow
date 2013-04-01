@@ -23,6 +23,12 @@ class VictoryPurchase < ActiveRecord::Base
   validates :email, :presence => true
   validates :stripe_token, :presence => true
 
+  monetize :price_in_cents, :as => :price_in_dollars
+
+  def price_in_cents
+    return VICTORY_PRICE
+  end
+
   def complete
 
     # Create the charge on Stripe's servers - this will charge the user's card

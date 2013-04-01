@@ -1,7 +1,9 @@
 = javascript 'victory_signup_manifest'
 = meta_tag 'stripe-key', @stripe_publishable_key
 
-%h2 Victory Framework- Single License ($199)
+%h2 
+  Victory Framework- Single License 
+  ="(#{money_without_cents_and_with_symbol @victory_purchase.price_in_dollars})"
 %p
   One license for the Victory Framework, with updates for one year.  This is a one time payment.
 %noscript
