@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130315003625) do
+ActiveRecord::Schema.define(:version => 20130327202226) do
 
   create_table "plans", :force => true do |t|
     t.string   "stripe_id"
@@ -62,5 +62,18 @@ ActiveRecord::Schema.define(:version => 20130315003625) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], :name => "index_users_roles_on_user_id_and_role_id"
+
+  create_table "victory_purchases", :force => true do |t|
+    t.string   "stripe_charge_id"
+    t.integer  "last_4"
+    t.string   "license_key"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.string   "token"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "stripe_token"
+  end
 
 end

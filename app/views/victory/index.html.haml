@@ -1,0 +1,65 @@
+= javascript 'victory_signup_manifest'
+= meta_tag 'stripe-key', @stripe_publishable_key
+
+%h2 Victory Framework- Single License ($199)
+%p
+  One license for the Victory Framework, with updates for one year.  This is a one time payment.
+%noscript
+  %p
+    This form requires Javascript to use
+.mini-container.spaced
+
+= form_for @victory_purchase, :url => { :action => "complete" }, :html => {:class => "signup_form"} do |f|  
+
+  .mini-container
+    %h3
+      Your Information
+    .field-row
+      =f.label :first_name, 'First name'
+      =f.text_field :first_name, :class => 'first-name'
+
+    .field-row
+      =f.label :last_name, 'Last name'
+      =f.text_field :last_name, :class => 'last-name'
+
+    .field-row
+      =f.label :email, 'Email'
+      =f.text_field :email
+
+    %p
+      We will send the receipt and license key to this email address.
+
+    .field-row
+      = f.hidden_field :stripe_token
+
+    .field-row
+      = f.hidden_field :last_4
+
+  .mini-container.payment-container.spaced-bottom
+    %h3
+      Payment Information
+
+    .credit-card-errors#credit-card-errors
+      #stripe-error.error.hidden
+
+    .field-row
+      = label_tag :credit_card_number
+      = text_field_tag :credit_card_number, params[:credit_card_number], :class => 'credit-card-number'
+
+    .field-row
+      = label_tag :expiry_date
+      = date_select "", :expiry_date, {:discard_day => true, :order => [:month, :year], :use_month_numbers => true, :start_year => Date.today.year, :end_year => Date.today.year + 25}, {:class => "small expiry-date"}
+
+    .field-row
+      = label_tag :cvv, 'CVV'
+      = text_field_tag :cvv, params[:cvv], :class => 'small cvv'
+
+  .mini-container
+    %h3
+      Total: $199.00
+  .mini-container.spaced-bottom
+    .field-row
+      = f.submit 'Purchase', :class => 'button'
+  .mini-container.spaced-bottom
+    %p
+      We'll send you your license key once payment is confirmed

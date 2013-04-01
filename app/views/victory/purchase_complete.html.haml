@@ -1,0 +1,21 @@
+%h1
+  Thanks for your purchase!
+%br
+%h2
+  Victory Framework- Single license
+%h5
+  Purchased on
+  =@victory_purchase.created_at.strftime("%B %d, %Y")
+%h5
+  One year of updates included
+%br
+
+%p
+  Your license key is below.  Just paste this key into the activation section of Victory and you're all set.  You'll alse recieve an email receipt with a copy of the license key.
+
+%p
+  If you have any trouble, please
+  =mail_to('hello@victoryframework.com', 'get in touch.')
+
+.license-key-container
+  =@victory_purchase.license_key

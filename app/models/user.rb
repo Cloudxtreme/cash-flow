@@ -97,6 +97,12 @@ class User < ActiveRecord::Base
     false
   end
   
+  # creates a user with a random password
+  def self.create_with_password(attributes)
+    attributes[:password] = Devise.friendly_token[0,20]
+    User.create attributes
+  end
+
   def update_with_stripe(subscription, attributes)
     return if email.include?(ENV['ADMIN_EMAIL'])
 

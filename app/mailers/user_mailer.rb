@@ -23,4 +23,14 @@ class UserMailer < ActionMailer::Base
     mail(:to => "\"#{user.name}\" <#{user.email}>", :subject => "#{user.name} has signed up for a subscription")
   end
 
+  def notify_admin_of_victory_signup(victory_purchase)
+    @victory_purchase = victory_purchase
+    mail(:to => "\"Victory Team\" <hello@victoryframework.com>", :subject => "#{victory_purchase.first_name} #{victory_purchase.last_name} has purchased a license")
+  end
+
+  def notify_victory_customer(victory_purchase)
+    @victory_purchase = victory_purchase
+    mail(:to => "\"#{victory_purchase.first_name} #{victory_purchase.last_name}\" <#{victory_purchase.email}>", :subject => "Victory Framework license")    
+  end
+
 end

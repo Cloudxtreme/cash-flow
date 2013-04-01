@@ -15,3 +15,6 @@ elsif Rails.env.production?
   ENV['DOMAIN']                 = ENV['PRODUCTION_DOMAIN']
 
 end
+
+VICTORY_PRICE           = 19900
+VICTORY_API_KEY         = '4WEYIKYL602RRSG9W5AX'

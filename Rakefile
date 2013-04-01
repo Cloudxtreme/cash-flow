@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Cashflow::Application.load_tasks
+Victorypayment::Application.load_tasks

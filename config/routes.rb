@@ -1,4 +1,4 @@
-Cashflow::Application.routes.draw do
+Victorypayment::Application.routes.draw do
 
   mount StripeEvent::Engine => '/stripe'
 
@@ -21,5 +21,9 @@ Cashflow::Application.routes.draw do
   devise_for :users, :path => '', :path_names => {:sign_in => 'login', :sign_out => 'logout', :sign_up => 'register'}, :controllers => { :registrations => 'registrations' }
   get 'my-account' => 'users#my_account', :as => 'my_account'
   put 'my-account' => 'users#update_my_account', :as => 'update_my_account'
+
+  get 'victory' => 'victory#index'
+  post 'victory-complete' => 'victory#complete', :as => 'victory_complete'
+  get 'victory/:token' => 'victory#purchase_complete', :as => 'victory_purchase_complete'
   
 end

@@ -1,4 +1,4 @@
-Cashflow::Application.configure do
+Victorypayment::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
@@ -13,7 +13,7 @@ Cashflow::Application.configure do
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
-  config.assets.precompile += [ 'signup_manifest.js' ]
+  config.assets.precompile += [ 'signup_manifest.js', 'victory_signup_manifest.js' ]
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
   config.assets.compile = false
