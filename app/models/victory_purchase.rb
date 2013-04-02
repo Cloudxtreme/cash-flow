@@ -48,6 +48,7 @@ class VictoryPurchase < ActiveRecord::Base
       self.generate_token
 
       if self.save
+        self.register_victory_license_key
         UserMailer.notify_victory_customer(self).deliver
         UserMailer.notify_admin_of_victory_signup(self).deliver
         return true
@@ -63,6 +64,11 @@ class VictoryPurchase < ActiveRecord::Base
       logger.debug e.inspect
       return false
     end
+  end
+
+  def register_victory_license_key
+    require 'net/http'
+    result = Net::HTTP.get(URI.parse("http://validate.victoryframework.com/activation/registration.php?activation_code=#{self.license_key}&api_key=ams0d0amd90smads"))
   end
 
   def generate_license_key
