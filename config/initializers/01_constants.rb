@@ -16,5 +16,5 @@ elsif Rails.env.production?
 
 end
 
-VICTORY_PRICE           = 100
+VICTORY_PRICE           = 19900
 VICTORY_API_KEY         = '4WEYIKYL602RRSG9W5AX'
