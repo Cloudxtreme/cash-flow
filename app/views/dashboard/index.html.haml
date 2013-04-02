@@ -1,8 +1,38 @@
-%h2
-  Dashboard
 
 %h3
-  Expect #{ humanized_money_with_symbol('%.2f' % (@total.to_i/100.0))  } in subscriptions this month.
+  #{ humanized_money_with_symbol @total } earned in total.
 
 %p
   Verify this on #{ link_to 'Stripe', 'http://manage.stripe.com' }!
+
+%h2
+  Victory Framework Versions
+%p
+  These are different framework versions- so you can adjust the price per framework version as needed.
+
+%table
+  %thead
+    %tr
+      %th
+        Name
+      %th
+        Price
+      %th
+        Actions
+  %tbody
+    - @victory_frameworks.each do |victory_framework|
+      %tr
+        %td
+          =victory_framework.name
+        %td
+          =money_without_cents_and_with_symbol victory_framework.price_montized
+        %td
+          =link_to 'Edit', edit_victory_framework_path(victory_framework)
+          =link_to "Delete", {:controller => :victory_frameworks, :action => 'destroy', :id => victory_framework.id }, :method => :delete 
+          =link_to 'View Payment Page', version_path(victory_framework.name)
+.mini-container.spaced
+=link_to 'Add a new Victory Framework version', new_victory_framework_path
+
+
+
+

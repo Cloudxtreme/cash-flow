@@ -1,4 +1,4 @@
 #{@victory_purchase.first_name} #{@victory_purchase.last_name} has purchased the Victory Framework.  Hoorah.
 
 %br
-$199 in the bank!
+#{money_without_cents_and_with_symbol @victory_purchase.victory_framework.price_montized}

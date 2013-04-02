@@ -3,12 +3,13 @@ class DashboardController < ApplicationController
   # before_filter :authorize_as_admin
 
   def index
+    @victory_frameworks = VictoryFramework.all
+
     if current_user.is? :admin
-      subscriptions = Subscription.where :active => true
 
       @total = 0
-      subscriptions.each do |subscription|
-        @total += subscription.plan.amount
+      VictoryPurchase.all.each do |victory_purchase|
+        @total += victory_purchase.victory_framework.price
       end
 
       render 'dashboard/index'

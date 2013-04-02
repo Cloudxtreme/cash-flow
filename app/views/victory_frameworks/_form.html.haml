@@ -1,0 +1,22 @@
+.form-box
+  -if @victory_framework.errors.any? 
+    .error-box   
+      -@victory_framework.errors.full_messages.each do |error|
+        .error
+          =error
+
+  = form_for @victory_framework do |f|
+    .field-row
+      =f.label :name, 'Name (for slug, lowerspace, unique, no spaces, dashes only)'
+      =f.text_field :name
+
+    .field-row
+      =f.label :title, 'Title (displayed on the signup page)'
+      =f.text_field :title
+
+    .field-row
+      =f.label :price, 'Price (cents only, whole number, i.e. 19900, no units)'
+      =f.text_field :price
+
+    .field-row
+      = f.submit nil, :class => 'button'

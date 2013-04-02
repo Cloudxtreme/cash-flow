@@ -23,18 +23,14 @@ class VictoryPurchase < ActiveRecord::Base
   validates :email, :presence => true
   validates :stripe_token, :presence => true
 
-  monetize :price_in_cents, :as => :price_in_dollars
-
-  def price_in_cents
-    return VICTORY_PRICE
-  end
+  belongs_to :victory_framework
 
   def complete
 
     # Create the charge on Stripe's servers - this will charge the user's card
     begin
       charge = Stripe::Charge.create(
-        :amount => VICTORY_PRICE, # amount in cents, again
+        :amount => self.victory_framework.price, # amount in cents, again
         :currency => "usd",
         :card => self.stripe_token,
         :description => "Victory payment from #{self.first_name} #{self.last_name}, #{self.email}"

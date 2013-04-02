@@ -5,13 +5,15 @@ Victorypayment::Application.routes.draw do
   get "dashboard" => 'dashboard#index', :as => 'dashboard'
 
   resources :subscriptions
-  root :to => 'victory_purchase#index', :as => 'root'
+  root :to => 'victory_purchases#index', :as => 'root'
+  get 'special/:name' => 'victory_purchases#version', :as => 'version'
 
-  post 'complete' => 'victory_purchase#complete', :as => 'victory_purchase_complete'
-  get 'receipt/:token' => 'victory_purchase#receipt', :as => 'victory_purchase_receipt'
+  post 'complete' => 'victory_purchases#complete', :as => 'victory_purchases_complete'
+  get 'receipt/:token' => 'victory_purchases#receipt', :as => 'victory_purchases_receipt'
 
   resources :plans
   resources :users
+  resources :victory_frameworks, :path => 'victory-frameworks'
 
   authenticated :user do
     root :to => 'dashboard#index'
