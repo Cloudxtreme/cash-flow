@@ -7,10 +7,7 @@ class DashboardController < ApplicationController
 
     if current_user.is? :admin
 
-      @total = 0
-      VictoryPurchase.all.each do |victory_purchase|
-        @total += victory_purchase.victory_framework.price
-      end
+      @total = VictoryPurchase.total
 
       render 'dashboard/index'
     else

@@ -3,7 +3,7 @@
 
 %h2 
   ="#{@victory_purchase.victory_framework.title}"
-  ="(#{money_without_cents_and_with_symbol @victory_purchase.victory_framework.price_montized })"
+  ="(#{money_without_cents_and_with_symbol @victory_purchase.victory_framework.price_monetized })"
 %p
   One license for the Victory Framework, with updates for one year.  This is a one time payment.
 %noscript
@@ -59,7 +59,7 @@
 
   .mini-container
     %h3
-      ="Total: #{money_without_cents_and_with_symbol @victory_purchase.victory_framework.price_montized}"
+      ="Total: #{money_without_cents_and_with_symbol @victory_purchase.victory_framework.price_monetized}"
   .mini-container.spaced-bottom
     .field-row
       = f.submit 'Purchase', :class => 'button'

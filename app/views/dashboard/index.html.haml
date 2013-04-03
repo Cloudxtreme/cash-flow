@@ -1,6 +1,6 @@
 
 %h3
-  #{ humanized_money_with_symbol @total } earned in total.
+  #{ money_without_cents_and_with_symbol @total } earned in total.
 
 %p
   Verify this on #{ link_to 'Stripe', 'http://manage.stripe.com' }!
@@ -25,7 +25,7 @@
         %td
           =victory_framework.name
         %td
-          =money_without_cents_and_with_symbol victory_framework.price_montized
+          =money_without_cents_and_with_symbol victory_framework.price_monetized
         %td
           =link_to 'Edit', edit_victory_framework_path(victory_framework)
           =link_to "Delete", {:controller => :victory_frameworks, :action => 'destroy', :id => victory_framework.id }, :method => :delete 

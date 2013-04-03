@@ -25,6 +25,14 @@ class VictoryPurchase < ActiveRecord::Base
 
   belongs_to :victory_framework
 
+  def self.total
+    total = Money.new(0, "USD")
+    VictoryPurchase.all.each do |victory_purchase|
+      total += victory_purchase.victory_framework.price_monetized
+    end
+    return total
+  end
+
   def complete
 
     # Create the charge on Stripe's servers - this will charge the user's card
