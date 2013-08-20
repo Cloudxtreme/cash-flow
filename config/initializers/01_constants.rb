@@ -1,4 +1,4 @@
-if Rails.env.development?
+if Rails.env.development? or Rails.env.production?
 
   # AWS S3
   ENV['STRIPE_API_KEY']         = ENV['STRIPE_TEST_API_KEY']
